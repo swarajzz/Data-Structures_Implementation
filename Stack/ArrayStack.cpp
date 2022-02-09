@@ -5,6 +5,7 @@ using namespace std;
 class StackusingArray
 {
 private:
+    // Use a template
     int *data;
     int capacity;
     int nextIndex;
