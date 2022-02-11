@@ -11,6 +11,7 @@ class QueueUsingArray
     int capacity;
 
 public:
+    //Constructor
     QueueUsingArray(int totalSize)
     {
         data = new T[totalSize];
@@ -20,16 +21,19 @@ public:
         capacity = totalSize;
     }
 
+    // Current size of the queue
     int getSize()
     {
         return size;
     }
 
+    // Is empty?
     bool isEmpty()
     {
         return size == 0;
     }
 
+    // Insert into queue
     void enqueue(T element)
     {
         if (size == capacity)
@@ -47,6 +51,7 @@ public:
         size++;
     }
 
+    // Remove and return the front element
     T dequeue()
     {
         if (isEmpty())
@@ -61,6 +66,7 @@ public:
         return ans;
     }
 
+    // Earliest element
     T front()
     {
         if (isEmpty())
@@ -71,24 +77,3 @@ public:
         return data[firstIndex];
     }
 };
-
-int main()
-{
-    QueueUsingArray<int> q(5);
-
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
-    q.enqueue(40);
-    q.enqueue(50);
-    q.enqueue(60);
-
-    cout << q.front() << endl;
-    cout << q.dequeue() << endl;
-    cout << q.dequeue() << endl;
-    cout << q.dequeue() << endl;
-
-    cout << q.getSize() << endl;
-    cout << q.isEmpty() << endl;
-
-}
