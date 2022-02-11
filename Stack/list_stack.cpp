@@ -82,7 +82,6 @@ int main()
     s.push(4);
 
     cout << s.top() << endl;
-    cout << s.getSize() << endl;
 
     while (!s.isEmpty())
     {
