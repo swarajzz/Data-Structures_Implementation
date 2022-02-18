@@ -46,6 +46,7 @@ int countNodes(TreeNode<int> *head)
     return count;
 }
 
+// Total number of nodes in a generic tree
 int sumNodes(TreeNode<int> *head)
 {
     if (head == NULL)
@@ -60,6 +61,7 @@ int sumNodes(TreeNode<int> *head)
     return sum;
 }
 
+// Maximum node in a generic tree
 int maxOfNodes(TreeNode<int> *head)
 {
     int maxi = head->data;
@@ -70,7 +72,7 @@ int maxOfNodes(TreeNode<int> *head)
     return maxi;
 }
 
-// Height of a tree
+// Height of a generic tree
 int heightTree(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -86,6 +88,7 @@ int heightTree(TreeNode<int> *root)
     return height + 1;
 }
 
+// Print tree at level k or depth k
 void printAtLevelK(TreeNode<int> *root, int k)
 {
     if (k == 0)
@@ -100,6 +103,22 @@ void printAtLevelK(TreeNode<int> *root, int k)
     }
 }
 
+// Print leaf nodes in a generic tree
+int leafNodes(TreeNode<int> *root)
+{
+    int leaf = 0;
+    if (root->children.empty())
+    {
+        return 1;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        leaf += leafNodes(root->children[i]);
+    }
+
+    return leaf;
+}
+
 int main()
 {
     TreeNode<int> *root = takeInputLevelWise();
@@ -108,4 +127,6 @@ int main()
     cout << maxOfNodes(root) << endl;
     cout << heightTree(root) << endl;
     printAtLevelK(root, 2);
+    cout << endl;
+    cout << leafNodes(root) << endl;
 }
