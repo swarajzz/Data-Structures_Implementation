@@ -1,50 +1,7 @@
 #include <iostream>
-#include <queue>
 #include "TreeNode.h"
+#include <queue>
 
-// Print tree
-void printTree(TreeNode<int> *root)
-{
-    if (root == NULL)
-    {
-        return; // Edge Case
-    }
-    cout << root->data << ":";
-    for (int i = 0; i < root->children.size(); i++)
-    {
-        cout << root->children[i]->data << ",";
-    }
-    cout << endl;
-    for (int i = 0; i < root->children.size(); i++)
-    {
-        printTree(root->children[i]);
-    }
-}
-
-// Take input
-
-TreeNode<int> *takeInput()
-{
-    int rootData;
-    cout << "Enter data" << endl;
-    cin >> rootData;
-
-    TreeNode<int> *root = new TreeNode<int>(rootData);
-
-    int numChild;
-    cout << "Enter number of children of" << rootData << endl;
-    cin >> numChild;
-
-    for (int i = 0; i < numChild; i++)
-    {
-        TreeNode<int> *child = takeInput();
-        root->children.push_back(child);
-    }
-
-    return root;
-}
-
-// Take input level-wise
 TreeNode<int> *takeInputLevelWise()
 {
     int rootData;
@@ -75,19 +32,37 @@ TreeNode<int> *takeInputLevelWise()
     return root;
 }
 
-void deleteTree(TreeNode<int> *root)
+void preOrder(TreeNode<int> *root)
 {
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
     for (int i = 0; i < root->children.size(); i++)
     {
-        deleteTree(root->children[i]);
+        preOrder(root->children[i]);
     }
-    delete root;
+}
+
+void postOrder(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        postOrder(root->children[i]);
+    }
+
+    cout << root->data << " ";
 }
 
 int main()
 {
-
     TreeNode<int> *root = takeInputLevelWise();
-    printTree(root);
-    deleteTree(root);
+    preOrder(root);
+    cout << endl;
+    postOrder(root);
 }
