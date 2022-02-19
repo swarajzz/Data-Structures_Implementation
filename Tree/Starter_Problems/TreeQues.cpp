@@ -1,6 +1,6 @@
-#include <iostream>
-#include <queue>
 #include "TreeNode.h"
+#include <climits>
+#include <queue>
 
 TreeNode<int> *takeInputLevelWise()
 {
@@ -64,7 +64,8 @@ int sumNodes(TreeNode<int> *root)
 // Maximum node in a generic tree
 int maxOfNodes(TreeNode<int> *root)
 {
-    if(root == NULL){
+    if (root == NULL)
+    {
         return 0;
     }
     int maxi = root->data;
@@ -94,7 +95,8 @@ int heightTree(TreeNode<int> *root)
 // Print tree at level k or depth k
 void printAtLevelK(TreeNode<int> *root, int k)
 {
-    if(root == NULL){
+    if (root == NULL)
+    {
         return;
     }
     if (k == 0)
@@ -125,14 +127,41 @@ int leafNodes(TreeNode<int> *root)
     return leaf;
 }
 
+TreeNode<int> *maxChild(TreeNode<int> *root)
+{
+    TreeNode<int> *ans = root;
+    int sum = 0;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        sum += root->children[i]->data;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        TreeNode<int> *x = maxChild(root->children[i]);
+        int xsum = x->data;
+        for (int i = 0; i < x->children.size(); i++)
+        {
+            xsum += x->children[i]->data;
+        }
+
+        if (xsum > sum)
+        {
+            sum = xsum;
+            ans = x;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
     TreeNode<int> *root = takeInputLevelWise();
-    cout << countNodes(root) << endl;
-    cout << sumNodes(root) << endl;
-    cout << maxOfNodes(root) << endl;
-    cout << heightTree(root) << endl;
-    printAtLevelK(root, 2);
-    cout << endl;
-    cout << leafNodes(root) << endl;
+    // cout << countNodes(root) << endl;
+    // cout << sumNodes(root) << endl;
+    // cout << maxOfNodes(root) << endl;
+    // cout << heightTree(root) << endl;
+    // printAtLevelK(root, 2);
+    // cout << endl;
+    // cout << leafNodes(root) << endl;
+    cout << maxChild(root) -> data << endl;
 }
