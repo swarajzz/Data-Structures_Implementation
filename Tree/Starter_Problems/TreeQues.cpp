@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "TreeNode.h"
 #include <climits>
 #include <queue>
@@ -99,16 +99,18 @@ void printAtLevelK(TreeNode<int> *root, int k)
     if (root == NULL)
     {
         return;
-    }
-    if (k == 0)
+    } // calculating sum for max node
     {
-        cout << root->data << " ";
-        return;
-    }
+        if (k == 0)
+        {
+            cout << root->data << " ";
+            return;
+        }
 
-    for (int i = 0; i < root->children.size(); i++)
-    {
-        printAtLevelK(root->children[i], k - 1);
+        for (int i = 0; i < root->children.size(); i++)
+        {
+            printAtLevelK(root->children[i], k - 1);
+        }
     }
 }
 
