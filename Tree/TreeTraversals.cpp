@@ -32,6 +32,27 @@ TreeNode<int> *takeInputLevelWise()
     return root;
 }
 
+void printTreeLevelWise(TreeNode<int> *root)
+{
+    queue<TreeNode<int> *> pendingNodes;
+    pendingNodes.push(root);
+
+    while (pendingNodes.size() != 0)
+    {
+        TreeNode<int> *front = pendingNodes.front();
+        pendingNodes.pop();
+
+        cout << front->data << " : ";
+
+        for (int i = 0; i < front->children.size(); i++)
+        {
+            cout << front->children[i]->data << ",";
+            pendingNodes.push(front->children[i]);
+        }
+        cout << endl;
+    }
+}
+
 void preOrder(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -57,12 +78,4 @@ void postOrder(TreeNode<int> *root)
     }
 
     cout << root->data << " ";
-}
-
-int main()
-{
-    TreeNode<int> *root = takeInputLevelWise();
-    preOrder(root);
-    cout << endl;
-    postOrder(root);
 }
