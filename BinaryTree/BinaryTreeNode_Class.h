@@ -18,4 +18,4 @@ public:
         delete left;
         delete right;
     }
-}
+};
